@@ -256,7 +256,6 @@ odc_scan_powerup_array(arr)
 		if ( !odc_is_near_recent_death(ent.origin) )
 			continue;
 
-		iprintln("^2ODC COUNTED^7 " + name);
 		level thread odc_on_powerup_detected(name);
 	}
 }
