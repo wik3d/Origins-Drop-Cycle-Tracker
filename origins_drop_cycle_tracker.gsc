@@ -174,11 +174,8 @@ odc_is_cycle_eligible_zombie(zombie)
 	if ( isDefined(zombie.model) )
 		text += " " + toLower(zombie.model);
 
-	// Ignore only generator-capture zombies
+	// Ignore only the generator-capture zombies
 	if ( isSubStr(text, "capture_zombie") )
-		return false;
-
-	if ( isSubStr(text, "zone_capture") )
 		return false;
 
 	return true;
