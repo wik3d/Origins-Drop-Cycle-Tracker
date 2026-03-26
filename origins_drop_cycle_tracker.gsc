@@ -145,8 +145,43 @@ odc_track_zombie_death()
 {
 	self waittill("death");
 
+	if ( !odc_is_cycle_eligible_zombie(self) )
+		return;
+
 	if ( isDefined(self.origin) )
 		odc_add_recent_death(self.origin);
+}
+
+odc_is_cycle_eligible_zombie(zombie)
+{
+	text = "";
+
+	if ( isDefined(zombie.targetname) )
+		text += " " + toLower(zombie.targetname);
+
+	if ( isDefined(zombie.script_noteworthy) )
+		text += " " + toLower(zombie.script_noteworthy);
+
+	if ( isDefined(zombie.classname) )
+		text += " " + toLower(zombie.classname);
+
+	if ( isDefined(zombie.animname) )
+		text += " " + toLower(zombie.animname);
+
+	if ( isDefined(zombie.script_linkname) )
+		text += " " + toLower(zombie.script_linkname);
+
+	if ( isDefined(zombie.model) )
+		text += " " + toLower(zombie.model);
+
+	// Ignore only generator-capture zombies
+	if ( isSubStr(text, "capture_zombie") )
+		return false;
+
+	if ( isSubStr(text, "zone_capture") )
+		return false;
+
+	return true;
 }
 
 odc_add_recent_death(pos)
